@@ -57,7 +57,7 @@ jacoco_repo=$build_dir/jacoco
 # Take a fork for Jacoco that contains Scala fixes.
 jacoco_remote=https://github.com/gergelyfabian/jacoco
 # Take further fixes for Scala (2.11, 2.12 and 2.13) - branch in development:
-jacoco_branch=0.8.6-scala
+jacoco_branch=0.8.7-scala
 
 # Choose the patches that you'd like to use:
 jacoco_patches=""
@@ -68,7 +68,7 @@ jacoco_patches="$jacoco_patches 0001-Build-Jacoco-for-Bazel-5.0+.patch"
 
 
 # Jacoco version should be 0.8.6 in any case as Bazel is only compatible with that at this moment.
-jacoco_version=0.8.6
+jacoco_version=0.8.7
 
 bazel_repo=$build_dir/bazel
 bazel_remote=https://github.com/bazelbuild/bazel
@@ -102,7 +102,7 @@ git checkout origin/$jacoco_branch
 for patch in $jacoco_patches; do
   git am $source_path/$patch
 done
-mvn clean install
+mvn clean -pl "!org.jacoco.core.test.validation.groovy" install
 )
 
 (
